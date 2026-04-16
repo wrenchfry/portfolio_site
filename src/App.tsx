@@ -2,9 +2,11 @@ import { BootSequence } from './components/layout/BootSequence'
 import { SiteHeader } from './components/layout/SiteHeader'
 import { AchievementsSection } from './components/sections/AchievementsSection'
 import { ContactSection } from './components/sections/ContactSection'
+import { GithubSection } from './components/sections/GithubSection'
 import { HeroSection } from './components/sections/HeroSection'
 import { ProfileSection } from './components/sections/ProfileSection'
 import { QuestLogSection } from './components/sections/QuestLogSection'
+import { SkillTreeSection } from './components/sections/SkillTreeSection'
 import { useBootSequence } from './hooks/useBootSequence'
 import { useGithubProfile } from './hooks/useGithubProfile'
 import { usePortfolioContent } from './hooks/usePortfolioContent'
@@ -13,7 +15,7 @@ import { useTypewriter } from './hooks/useTypewriter'
 const bootMessages = [
   '> INITIALIZING PORTFOLIO...',
   '> LOADING PIXEL ENGINE... OK',
-  '> MOUNTING QUEST LOG... OK',
+  '> MOUNTING SKILL TREE... OK',
   '> CONNECTING GITHUB API... OK',
   '> ALL SYSTEMS NOMINAL',
 ]
@@ -45,8 +47,10 @@ function App() {
           typewriter={typewriter}
         />
         <ProfileSection profile={content.profile} />
+        <SkillTreeSection skills={content.skills} />
         <QuestLogSection quests={content.quests} />
         <AchievementsSection achievements={content.achievements} />
+        <GithubSection github={github} />
         <ContactSection profile={content.profile} />
       </main>
 
