@@ -1,35 +1,64 @@
-function App() {
-  return (
-    <main className="min-h-screen bg-[#06060f] px-6 py-24 text-slate-100">
-      <div className="mx-auto flex max-w-5xl flex-col gap-10">
-        <div className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-cyan-300">
-            Lesego Sindani
-          </p>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-            Portfolio site in progress
-          </h1>
-          <p className="max-w-2xl text-lg text-slate-300">
-            Setting up the React, Vite, and Tailwind foundation for a game-inspired portfolio.
-          </p>
-        </div>
+import { BootSequence } from './components/layout/BootSequence'
+import { SiteHeader } from './components/layout/SiteHeader'
+import { AchievementsSection } from './components/sections/AchievementsSection'
+import { ContactSection } from './components/sections/ContactSection'
+import { HeroSection } from './components/sections/HeroSection'
+import { ProfileSection } from './components/sections/ProfileSection'
+import { QuestLogSection } from './components/sections/QuestLogSection'
+import { useBootSequence } from './hooks/useBootSequence'
+import { useGithubProfile } from './hooks/useGithubProfile'
+import { usePortfolioContent } from './hooks/usePortfolioContent'
+import { useTypewriter } from './hooks/useTypewriter'
 
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
-            <p className="text-sm uppercase tracking-[0.24em] text-slate-400">Stack</p>
-            <p className="mt-3 text-base text-slate-200">React, Vite, TypeScript, Tailwind CSS</p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
-            <p className="text-sm uppercase tracking-[0.24em] text-slate-400">Status</p>
-            <p className="mt-3 text-base text-slate-200">Scaffolding the first pass of the site.</p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
-            <p className="text-sm uppercase tracking-[0.24em] text-slate-400">Focus</p>
-            <p className="mt-3 text-base text-slate-200">Clean structure before the fun UI chaos.</p>
-          </div>
+const bootMessages = [
+  '> INITIALIZING PORTFOLIO...',
+  '> LOADING PIXEL ENGINE... OK',
+  '> MOUNTING QUEST LOG... OK',
+  '> CONNECTING GITHUB API... OK',
+  '> ALL SYSTEMS NOMINAL',
+]
+
+const heroPhrases = [
+  'Building cool things for people.',
+  'Shipping apps, bots, and side quests.',
+  'Turning ideas into something playable.',
+  'Commit. Push. Repeat.',
+]
+
+function App() {
+  const github = useGithubProfile('wrenchfry')
+  const { content } = usePortfolioContent(github.data)
+  const boot = useBootSequence(bootMessages)
+  const typewriter = useTypewriter(heroPhrases)
+
+  return (
+    <div className="min-h-screen bg-night text-ice">
+      <BootSequence lines={boot.lines} visible={boot.visible} />
+      <SiteHeader handle={content.profile.handle} />
+
+      <main className="mx-auto flex w-full max-w-7xl flex-col gap-24 px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+        <HeroSection
+          achievementCount={content.achievements.length}
+          github={github}
+          profile={content.profile}
+          questCount={content.quests.length}
+          typewriter={typewriter}
+        />
+        <ProfileSection profile={content.profile} />
+        <QuestLogSection quests={content.quests} />
+        <AchievementsSection achievements={content.achievements} />
+        <ContactSection profile={content.profile} />
+      </main>
+
+      <footer className="border-t border-neon-cyan/20 bg-black/40 px-4 py-8 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 text-sm text-ice-dim sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-display text-[0.55rem] uppercase tracking-[0.32em] text-neon-gold">
+            {content.profile.name}
+          </p>
+          <p>{new Date().getFullYear()} portfolio</p>
         </div>
-      </div>
-    </main>
+      </footer>
+    </div>
   )
 }
 
