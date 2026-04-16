@@ -1,5 +1,6 @@
 import { BootSequence } from './components/layout/BootSequence'
 import { SiteHeader } from './components/layout/SiteHeader'
+import { RetroBackdrop } from './components/canvas/RetroBackdrop'
 import { AchievementsSection } from './components/sections/AchievementsSection'
 import { ContactSection } from './components/sections/ContactSection'
 import { GithubSection } from './components/sections/GithubSection'
@@ -34,11 +35,13 @@ function App() {
   const typewriter = useTypewriter(heroPhrases)
 
   return (
-    <div className="min-h-screen bg-night text-ice">
+    <div className="relative min-h-screen overflow-x-hidden bg-night text-ice">
+      <RetroBackdrop />
+      <div className="scanlines pointer-events-none fixed inset-0 z-10 opacity-30" />
       <BootSequence lines={boot.lines} visible={boot.visible} />
       <SiteHeader handle={content.profile.handle} />
 
-      <main className="mx-auto flex w-full max-w-7xl flex-col gap-24 px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+      <main className="relative z-20 mx-auto flex w-full max-w-7xl flex-col gap-24 px-4 pb-16 pt-24 sm:px-6 lg:px-8">
         <HeroSection
           achievementCount={content.achievements.length}
           github={github}
@@ -54,7 +57,7 @@ function App() {
         <ContactSection profile={content.profile} />
       </main>
 
-      <footer className="border-t border-neon-cyan/20 bg-black/40 px-4 py-8 backdrop-blur">
+      <footer className="relative z-20 border-t border-neon-cyan/20 bg-black/40 px-4 py-8 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 text-sm text-ice-dim sm:flex-row sm:items-center sm:justify-between">
           <p className="font-display text-[0.55rem] uppercase tracking-[0.32em] text-neon-gold">
             {content.profile.name}
