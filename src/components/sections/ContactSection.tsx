@@ -15,6 +15,7 @@ export function ContactSection({ profile }: ContactSectionProps) {
     email: '',
     message: '',
   })
+
   const [notice, setNotice] = useState<string | null>(null)
   const [isSending, setIsSending] = useState(false)
 
@@ -35,11 +36,11 @@ export function ContactSection({ profile }: ContactSectionProps) {
 
     try {
       setIsSending(true)
-      const provider = await sendPortfolioMessage({
+
+      await sendPortfolioMessage({
         fromName: formState.name,
         replyTo: formState.email,
         message: formState.message,
-        toEmail: profile.email,
       })
 
       setFormState({
@@ -47,17 +48,11 @@ export function ContactSection({ profile }: ContactSectionProps) {
         email: '',
         message: '',
       })
-      setNotice(
-        provider === 'emailjs'
-          ? 'Message sent successfully.'
-          : 'Your mail app should open so you can finish sending the message.',
-      )
+
+      setNotice('Message sent successfully.')
     } catch (error) {
-      setNotice(
-        error instanceof Error
-          ? error.message
-          : 'The message could not be sent right now.',
-      )
+      console.error('EmailJS error:', error)
+      setNotice('The message could not be sent right now.')
     } finally {
       setIsSending(false)
     }
@@ -79,11 +74,15 @@ export function ContactSection({ profile }: ContactSectionProps) {
             ['location', profile.location],
           ].map(([label, value]) => (
             <div
-              className="panel flex items-center justify-between gap-4 border border-white/10 px-5 py-4"
               key={label}
+              className="panel flex items-center justify-between gap-4 border border-white/10 px-5 py-4"
             >
-              <span className="text-sm uppercase tracking-[0.24em] text-ice-dim">{label}</span>
-              <span className="text-right text-base text-ice">{value}</span>
+              <span className="text-sm uppercase tracking-[0.24em] text-ice-dim">
+                {label}
+              </span>
+              <span className="text-right text-base text-ice">
+                {value}
+              </span>
             </div>
           ))}
 
@@ -95,51 +94,58 @@ export function ContactSection({ profile }: ContactSectionProps) {
         <motion.form
           className="panel border border-white/10 p-6"
           initial={{ opacity: 0, y: 16 }}
-          onSubmit={handleSubmit}
-          transition={{ duration: 0.4 }}
-          viewport={{ once: true, amount: 0.2 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4 }}
+          onSubmit={handleSubmit}
         >
           <div className="grid gap-4">
             <label className="text-sm uppercase tracking-[0.22em] text-ice-dim">
               Name
               <input
                 className="mt-2 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-base text-ice outline-none transition focus:border-neon-green/50"
-                onChange={(event) => updateField('name', event.target.value)}
                 placeholder="Your name"
                 value={formState.name}
+                onChange={(e) => updateField('name', e.target.value)}
               />
             </label>
+
             <label className="text-sm uppercase tracking-[0.22em] text-ice-dim">
               Email
               <input
-                className="mt-2 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-base text-ice outline-none transition focus:border-neon-green/50"
-                onChange={(event) => updateField('email', event.target.value)}
-                placeholder="your@email.com"
                 type="email"
+                className="mt-2 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-base text-ice outline-none transition focus:border-neon-green/50"
+                placeholder="your@email.com"
                 value={formState.email}
+                onChange={(e) => updateField('email', e.target.value)}
               />
             </label>
+
             <label className="text-sm uppercase tracking-[0.22em] text-ice-dim">
               Message
               <textarea
                 className="mt-2 min-h-40 w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-base text-ice outline-none transition focus:border-neon-green/50"
-                onChange={(event) => updateField('message', event.target.value)}
-                placeholder="Tell me about the project, role, or ridiculously cool idea."
+                placeholder="Tell me about the project, role, or idea."
                 value={formState.message}
+                onChange={(e) => updateField('message', e.target.value)}
               />
             </label>
           </div>
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <button
-              className="pixel-button border-neon-green bg-neon-green text-night hover:shadow-neon disabled:cursor-not-allowed disabled:opacity-60"
-              disabled={isSending}
               type="submit"
+              disabled={isSending}
+              className="pixel-button border-neon-green bg-neon-green text-night hover:shadow-neon disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSending ? 'sending...' : 'send message'}
             </button>
-            {notice ? <p className="text-sm leading-6 text-ice-dim">{notice}</p> : null}
+
+            {notice && (
+              <p className="text-sm leading-6 text-ice-dim">
+                {notice}
+              </p>
+            )}
           </div>
         </motion.form>
       </div>
