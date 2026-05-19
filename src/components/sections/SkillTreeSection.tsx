@@ -18,9 +18,6 @@ type BranchSlot = {
 
 type BranchLayout = {
   root: Point
-  title: Point
-  titleAlign: 'left' | 'center' | 'right'
-  titleLines: string[]
   nodes: Record<string, BranchSlot>
 }
 
@@ -69,9 +66,6 @@ const branchStyles: Record<
 const branchLayouts: Record<SkillBranch, BranchLayout> = {
   languages: {
     root: { x: 138, y: 124 },
-    title: { x: 138, y: 214 },
-    titleAlign: 'left',
-    titleLines: ['Programming', 'Languages'],
     nodes: {
       haxe: { point: { x: 92, y: 64 } },
       python: { point: { x: 176, y: 56 } },
@@ -83,9 +77,6 @@ const branchLayouts: Record<SkillBranch, BranchLayout> = {
   },
   web: {
     root: { x: 248, y: 304 },
-    title: { x: 248, y: 396 },
-    titleAlign: 'left',
-    titleLines: ['Web Tech &', 'Frameworks'],
     nodes: {
       react: { point: { x: 198, y: 226 } },
       html: { point: { x: 290, y: 222 } },
@@ -97,9 +88,6 @@ const branchLayouts: Record<SkillBranch, BranchLayout> = {
   },
   tools: {
     root: { x: 132, y: 520 },
-    title: { x: 132, y: 590 },
-    titleAlign: 'left',
-    titleLines: ['Tools &', 'Platforms'],
     nodes: {
       'git-github': { point: { x: 232, y: 484 } },
       'azure-platform': { point: { x: 222, y: 566 } },
@@ -107,9 +95,6 @@ const branchLayouts: Record<SkillBranch, BranchLayout> = {
   },
   backend: {
     root: { x: 504, y: 132 },
-    title: { x: 504, y: 224 },
-    titleAlign: 'center',
-    titleLines: ['Backend & API'],
     nodes: {
       'dotnet-core': { point: { x: 438, y: 68 } },
       'aspnet-core': { point: { x: 572, y: 70 } },
@@ -121,9 +106,6 @@ const branchLayouts: Record<SkillBranch, BranchLayout> = {
   },
   databases: {
     root: { x: 824, y: 140 },
-    title: { x: 824, y: 232 },
-    titleAlign: 'center',
-    titleLines: ['Databases'],
     nodes: {
       sql: { point: { x: 760, y: 82 } },
       'relational-databases': { point: { x: 908, y: 82 } },
@@ -133,9 +115,6 @@ const branchLayouts: Record<SkillBranch, BranchLayout> = {
   },
   concepts: {
     root: { x: 508, y: 404 },
-    title: { x: 508, y: 500 },
-    titleAlign: 'center',
-    titleLines: ['Concepts'],
     nodes: {
       oop: { point: { x: 424, y: 316 } },
       debugging: { point: { x: 506, y: 286 } },
@@ -147,9 +126,6 @@ const branchLayouts: Record<SkillBranch, BranchLayout> = {
   },
   cloud: {
     root: { x: 836, y: 442 },
-    title: { x: 836, y: 530 },
-    titleAlign: 'center',
-    titleLines: ['Cloud & DevOps'],
     nodes: {
       'azure-services': { point: { x: 754, y: 364 } },
       'azure-portal': { point: { x: 920, y: 366 } },
@@ -212,12 +188,12 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
     <section className="section-shell" id="skill-tree">
       <SectionHeading
         kicker="Skill Tree"
-        subtitle="A clean branch map of the tools, foundations, and languages I keep building with."
+        subtitle="A Bloom-inspired skill graph with clear clusters, larger nodes, and direct relationships."
         title="Skill map"
       />
 
       <div className="hidden lg:block">
-        <div className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05),transparent_40%),linear-gradient(180deg,rgba(8,10,24,0.92),rgba(4,6,16,0.97))] px-4 py-5">
+        <div className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_42%),linear-gradient(180deg,rgba(7,9,20,0.98),rgba(4,6,16,1))] px-4 py-5">
           {renderableBranches.map((branch) => {
             const layout = branchLayouts[branch]
             const branchStyle = branchStyles[branch]
@@ -242,7 +218,6 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
           >
             {renderableBranches.map((branch) => {
               const layout = branchLayouts[branch]
-              const branchStyle = branchStyles[branch]
               const branchSkills = skillsByBranch.get(branch) ?? []
               const dimmed = activeBranch !== null && activeBranch !== branch
 
@@ -260,19 +235,13 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                     <path
                       d={path}
                       fill="none"
-                      stroke="rgba(11, 14, 29, 0.96)"
+                      stroke="rgba(255, 255, 255, 0.08)"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={12}
-                    />
-                    <path
-                      d={path}
-                      fill="none"
-                      opacity={dimmed ? 0.24 : 0.88}
-                      stroke={branchStyle.accent}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={activeBranch === branch ? 4 : 3}
+                      strokeWidth={activeBranch === branch ? 3.25 : 2.4}
+                      style={{
+                        opacity: dimmed ? 0.22 : 0.68,
+                      }}
                     />
                   </g>
                 )
@@ -294,7 +263,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                     <button
                       aria-pressed={activeSkillId === root.id}
                       className={cn(
-                        'absolute flex h-[96px] w-[96px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition duration-300',
+                        'absolute flex h-[112px] w-[112px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition duration-300',
                         branchDimmed && 'opacity-45',
                       )}
                       onClick={() => setActiveSkillId(root.id)}
@@ -308,44 +277,28 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                       }}
                       type="button"
                     >
-                      <span
-                        className="flex h-[78px] w-[78px] items-center justify-center rounded-full border bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),rgba(7,9,20,0.96)_68%)] font-display text-[0.62rem] uppercase tracking-[0.18em] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
-                        style={{
-                          color: branchStyle.accent,
-                          borderColor: `${branchStyle.accent}88`,
-                        }}
-                      >
-                        {root.icon}
-                      </span>
-                    </button>
-                  ) : null}
-
-                  <div
-                    className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2"
-                    style={positionAsPercent(layout.title)}
-                  >
-                    <div
-                      className={cn(
-                        'space-y-1',
-                        layout.titleAlign === 'center' && 'text-center',
-                        layout.titleAlign === 'left' && 'text-left',
-                        layout.titleAlign === 'right' && 'text-right',
-                      )}
-                    >
-                      {layout.titleLines.map((line) => (
-                        <p
-                          className="font-display text-[0.48rem] uppercase tracking-[0.28em]"
-                          key={`${branch}-${line}`}
+                      <div className="flex flex-col items-center">
+                        <span
+                          className="flex h-[88px] w-[88px] items-center justify-center rounded-full border text-center font-display text-[0.7rem] uppercase tracking-[0.12em] shadow-[0_10px_36px_rgba(0,0,0,0.35)]"
                           style={{
-                            color: branchStyle.accent,
-                            opacity: branchDimmed ? 0.46 : 0.92,
+                            color: '#ffffff',
+                            background: `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), ${branchStyle.accent})`,
+                            borderColor: 'rgba(255,255,255,0.58)',
                           }}
                         >
-                          {line}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
+                          {root.icon}
+                        </span>
+                        <span
+                          className="mt-3 max-w-[9rem] text-center font-sans text-[0.7rem] font-medium uppercase tracking-[0.12em] text-white/88"
+                          style={{
+                            textShadow: `0 0 18px ${branchStyle.glow}`,
+                          }}
+                        >
+                          {root.name}
+                        </span>
+                      </div>
+                    </button>
+                  ) : null}
 
                   {branchSkills.map((skill) => {
                     const slot = layout.nodes[skill.id]
@@ -360,7 +313,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                       <button
                         aria-pressed={isActive}
                         className={cn(
-                          'absolute flex h-[62px] w-[62px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition duration-300',
+                          'absolute flex h-[88px] w-[88px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition duration-300',
                           branchDimmed && 'opacity-38',
                         )}
                         key={skill.id}
@@ -373,15 +326,26 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                         }}
                         type="button"
                       >
-                        <span
-                          className="flex h-[46px] w-[46px] items-center justify-center rounded-full border bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.1),rgba(7,9,20,0.96)_72%)] font-display text-[0.42rem] uppercase tracking-[0.14em] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
-                          style={{
-                            color: isActive ? '#ffffff' : branchStyle.accent,
-                            borderColor: isActive ? branchStyle.accent : `${branchStyle.accent}66`,
-                          }}
-                        >
-                          {skill.shortLabel ?? skill.icon}
-                        </span>
+                        <div className="flex flex-col items-center">
+                          <span
+                            className="flex h-[54px] w-[54px] items-center justify-center rounded-full border font-display text-[0.5rem] uppercase tracking-[0.1em] shadow-[0_8px_24px_rgba(0,0,0,0.28)]"
+                            style={{
+                              color: '#ffffff',
+                              background: `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.18), ${branchStyle.accent})`,
+                              borderColor: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.34)',
+                            }}
+                          >
+                            {skill.shortLabel ?? skill.icon}
+                          </span>
+                          <span
+                            className="mt-2 max-w-[7rem] text-center font-sans text-[0.63rem] font-medium uppercase leading-4 tracking-[0.1em] text-white/78"
+                            style={{
+                              opacity: branchDimmed ? 0.5 : 1,
+                            }}
+                          >
+                            {skill.name}
+                          </span>
+                        </div>
                       </button>
                     )
                   })}
