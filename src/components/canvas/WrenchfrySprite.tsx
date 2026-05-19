@@ -29,9 +29,13 @@ export function WrenchfrySprite({
     let bounceValue = 0
     let walking = false
     let scrollTimeout = 0
+    const canAnimate =
+      interactive &&
+      window.innerWidth >= 1024 &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const animate = () => {
-      if (interactive && walking) {
+      if (walking) {
         walkTimer += 1
         bounceValue += bounceDirection * 0.9
 
@@ -55,7 +59,7 @@ export function WrenchfrySprite({
     }
 
     const onScroll = () => {
-      if (!interactive) {
+      if (!canAnimate) {
         return
       }
 
@@ -67,6 +71,10 @@ export function WrenchfrySprite({
     }
 
     drawWrenchfry(context, scale, 0, 0)
+    if (!canAnimate) {
+      return
+    }
+
     animate()
     window.addEventListener('scroll', onScroll, { passive: true })
 

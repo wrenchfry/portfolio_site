@@ -18,8 +18,8 @@ export function QuestLogSection({ quests }: QuestLogSectionProps) {
     <section className="section-shell" id="quests">
       <SectionHeading
         kicker="Quest Log"
-        subtitle="Live projects from GitHub, grouped by what is active, wrapped, or still waiting on the next unlock."
-        title="Current, completed, and available runs"
+        subtitle="Project work grouped by what is active now, what has shipped, and what is still queued for the next pass."
+        title="Projects in play"
       />
 
       <div className="grid gap-5 xl:grid-cols-2">

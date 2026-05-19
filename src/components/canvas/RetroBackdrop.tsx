@@ -41,29 +41,59 @@ export function RetroBackdrop() {
     let frame = 0
     let drops: Drop[] = []
     let nodes: NodePoint[] = []
+    let compactMode = false
 
     const resize = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
+      compactMode =
+        window.innerWidth < 900 ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-      drops = Array.from({ length: Math.floor(canvas.width / 20) }, () => ({
+      drops = Array.from({ length: Math.floor(canvas.width / (compactMode ? 42 : 20)) }, () => ({
         y: Math.random() * canvas.height,
-        speed: 1 + Math.random() * 2,
-        opacity: 0.08 + Math.random() * 0.2,
+        speed: compactMode ? 0.45 + Math.random() * 0.7 : 1 + Math.random() * 2,
+        opacity: compactMode ? 0.04 + Math.random() * 0.08 : 0.08 + Math.random() * 0.2,
       }))
 
       nodes = Array.from(
-        { length: Math.floor((canvas.width * canvas.height) / 28000) },
+        { length: Math.floor((canvas.width * canvas.height) / (compactMode ? 95000 : 28000)) },
         () => ({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          radius: 2 + Math.random() * 3,
+          vx: (Math.random() - 0.5) * (compactMode ? 0.16 : 0.4),
+          vy: (Math.random() - 0.5) * (compactMode ? 0.16 : 0.4),
+          radius: compactMode ? 1.5 + Math.random() * 2 : 2 + Math.random() * 3,
           pulse: Math.random() * Math.PI * 2,
           color: Math.random() > 0.5 ? '0, 212, 255' : '0, 255, 136',
         }),
       )
+    }
+
+    const renderStatic = () => {
+      context.clearRect(0, 0, canvas.width, canvas.height)
+      context.fillStyle = 'rgba(6, 6, 15, 0.92)'
+      context.fillRect(0, 0, canvas.width, canvas.height)
+
+      for (let index = 0; index < nodes.length; index += 1) {
+        const node = nodes[index]
+        const next = nodes[index + 1]
+        context.fillStyle = `rgba(${node.color}, 0.18)`
+        context.beginPath()
+        context.arc(node.x, node.y, node.radius, 0, Math.PI * 2)
+        context.fill()
+
+        if (!next) {
+          continue
+        }
+
+        context.strokeStyle = `rgba(${node.color}, 0.08)`
+        context.lineWidth = 1
+        context.beginPath()
+        context.moveTo(node.x, node.y)
+        context.lineTo(next.x, next.y)
+        context.stroke()
+      }
     }
 
     const render = () => {
@@ -86,10 +116,11 @@ export function RetroBackdrop() {
         }
       })
 
-      nodes.forEach((node) => {
+      for (let index = 0; index < nodes.length; index += 1) {
+        const node = nodes[index]
         node.x += node.vx
         node.y += node.vy
-        node.pulse += 0.03
+        node.pulse += compactMode ? 0.018 : 0.03
 
         if (node.x < 0 || node.x > canvas.width) {
           node.vx *= -1
@@ -101,28 +132,29 @@ export function RetroBackdrop() {
 
         const glow = Math.sin(node.pulse) * 0.5 + 0.5
 
-        nodes.forEach((peer) => {
+        for (let peerIndex = index + 1; peerIndex < nodes.length; peerIndex += 1) {
+          const peer = nodes[peerIndex]
           const dx = node.x - peer.x
           const dy = node.y - peer.y
           const distance = Math.sqrt(dx * dx + dy * dy)
 
-          if (distance < 140 && distance > 0) {
-            context.strokeStyle = `rgba(${node.color}, ${(1 - distance / 140) * 0.12 * glow})`
+          if (distance < (compactMode ? 86 : 140)) {
+            context.strokeStyle = `rgba(${node.color}, ${(1 - distance / (compactMode ? 86 : 140)) * (compactMode ? 0.08 : 0.12) * glow})`
             context.lineWidth = 0.7
             context.beginPath()
             context.moveTo(node.x, node.y)
             context.lineTo(peer.x, peer.y)
             context.stroke()
           }
-        })
+        }
 
         context.fillStyle = `rgba(${node.color}, ${0.22 + glow * 0.3})`
         context.beginPath()
         context.arc(node.x, node.y, node.radius + glow * 1.5, 0, Math.PI * 2)
         context.fill()
-      })
+      }
 
-      if (frame % 220 === 0) {
+      if (!compactMode && frame % 220 === 0) {
         context.fillStyle = 'rgba(191, 0, 255, 0.12)'
         context.font = '12px monospace'
         context.fillText(
@@ -136,12 +168,24 @@ export function RetroBackdrop() {
     }
 
     resize()
-    render()
-    window.addEventListener('resize', resize)
+    if (compactMode) {
+      renderStatic()
+    } else {
+      render()
+    }
+
+    const onResize = () => {
+      resize()
+      if (compactMode) {
+        renderStatic()
+      }
+    }
+
+    window.addEventListener('resize', onResize)
 
     return () => {
       window.cancelAnimationFrame(animationFrame)
-      window.removeEventListener('resize', resize)
+      window.removeEventListener('resize', onResize)
     }
   }, [])
 

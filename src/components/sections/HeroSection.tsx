@@ -47,7 +47,7 @@ export function HeroSection({
   ]
 
   return (
-    <section className="section-shell grid gap-8 overflow-hidden lg:grid-cols-[1.15fr_0.85fr]">
+    <section className="section-shell grid gap-8 overflow-hidden lg:grid-cols-[1.12fr_0.88fr]">
       <div className="relative space-y-6">
         <motion.p
           animate={{ opacity: 1, y: 0 }}
@@ -57,43 +57,51 @@ export function HeroSection({
         >
           Overview
         </motion.p>
+
         <motion.div
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
           initial={{ opacity: 0, y: 16 }}
           transition={{ delay: 0.05, duration: 0.5 }}
         >
-          <h1 className="max-w-3xl font-display text-lg uppercase leading-[1.9] tracking-[0.2em] text-neon-gold sm:text-2xl lg:text-[2rem]">
+          <h1 className="max-w-3xl font-display text-base uppercase leading-[1.7] tracking-[0.18em] text-neon-gold sm:text-xl lg:text-[1.85rem]">
             {profile.name}
           </h1>
-          <p className="text-lg uppercase tracking-[0.24em] text-neon-cyan sm:text-xl">
+          <p className="max-w-2xl text-sm uppercase tracking-[0.24em] text-neon-cyan sm:text-base lg:text-lg">
             {profile.role}
           </p>
-          <p className="max-w-2xl text-lg leading-8 text-ice-dim sm:text-xl">
+          <p className="max-w-2xl text-base leading-8 text-ice-dim sm:text-lg">
             {profile.headline}
           </p>
         </motion.div>
 
         <motion.div
           animate={{ opacity: 1 }}
-          className="min-h-8 font-mono text-3xl text-neon-green"
+          className="flex min-h-[4.8rem] items-center rounded-[24px] border border-neon-green/18 bg-black/25 px-4 py-4 font-mono text-[2rem] leading-none text-neon-green shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:min-h-[5rem] sm:text-[2.4rem]"
           initial={{ opacity: 0 }}
           transition={{ delay: 0.1, duration: 0.45 }}
         >
-          {typewriter}
-          <span className="animate-pulse">█</span>
+          <span>{typewriter}</span>
+          <span className="ml-2 inline-block h-8 w-[0.45ch] animate-pulse rounded-sm bg-neon-green/80 align-middle sm:h-9" />
         </motion.div>
 
         <motion.div
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-wrap items-center gap-3"
+          className="panel max-w-2xl border border-neon-green/18 px-5 py-4"
           initial={{ opacity: 0, y: 12 }}
           transition={{ delay: 0.16, duration: 0.5 }}
         >
-          <span className="pixel-frame inline-flex items-center gap-2 border border-neon-green/40 bg-neon-green/10 px-4 py-2 text-sm uppercase tracking-[0.22em] text-neon-green">
-            <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-neon-green" />
-            {profile.availability}
-          </span>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-5">
+            <div className="flex items-center gap-3">
+              <span className="h-2.5 w-2.5 rounded-full bg-neon-green shadow-[0_0_18px_rgba(34,243,154,0.5)]" />
+              <p className="font-display text-[0.52rem] uppercase tracking-[0.24em] text-neon-green">
+                Status
+              </p>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-ice-dim sm:text-base">
+              {profile.availability}
+            </p>
+          </div>
         </motion.div>
 
         <motion.div
@@ -103,15 +111,10 @@ export function HeroSection({
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           <a className="pixel-button border-neon-green bg-neon-green text-night hover:shadow-neon" href="#quests">
-            view quests
+            quest log
           </a>
-          <a
-            className="pixel-button border-neon-cyan bg-neon-cyan/10 text-neon-cyan hover:shadow-cyan"
-            href={profile.githubUrl}
-            rel="noreferrer"
-            target="_blank"
-          >
-            github log
+          <a className="pixel-button border-neon-cyan bg-neon-cyan/10 text-neon-cyan hover:shadow-cyan" href="#github">
+            activity log
           </a>
         </motion.div>
 
@@ -137,7 +140,7 @@ export function HeroSection({
 
       <motion.div
         animate={{ opacity: 1, scale: 1 }}
-        className="panel relative flex min-h-[26rem] items-center justify-center overflow-hidden border border-neon-gold/25 bg-gradient-to-b from-neon-gold/10 via-panel/70 to-black/50"
+        className="panel relative flex min-h-[22rem] items-center justify-center overflow-hidden border border-neon-gold/25 bg-gradient-to-b from-neon-gold/10 via-panel/70 to-black/50"
         initial={{ opacity: 0, scale: 0.96 }}
         transition={{ delay: 0.12, duration: 0.55 }}
       >

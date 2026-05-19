@@ -41,7 +41,7 @@ function App() {
       <BootSequence lines={boot.lines} visible={boot.visible} />
       <SiteHeader handle={content.profile.handle} />
 
-      <main className="relative z-20 mx-auto flex w-full max-w-7xl flex-col gap-24 px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+      <main className="relative z-20 mx-auto flex w-full max-w-7xl flex-col gap-24 px-4 pb-16 pt-32 sm:px-6 sm:pt-28 lg:px-8 lg:pt-24">
         <HeroSection
           achievementCount={content.achievements.length}
           github={github}
