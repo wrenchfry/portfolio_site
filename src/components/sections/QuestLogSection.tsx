@@ -18,16 +18,36 @@ export function QuestLogSection({ quests }: QuestLogSectionProps) {
     <section className="section-shell" id="quests">
       <SectionHeading
         kicker="Quest Log"
-        subtitle="Project work grouped by what is active now, what has shipped, and what is still queued for the next pass."
+        subtitle=""
         title="Projects in play"
       />
 
       <div className="grid gap-5 xl:grid-cols-2">
         {quests.map((quest, index) => (
           <motion.article
-            className="group panel relative overflow-hidden border border-white/10 p-6 transition hover:-translate-y-1 hover:border-neon-gold/35 hover:shadow-gold"
+            className={cn(
+              'group panel relative overflow-hidden border border-white/10 p-6 transition hover:-translate-y-1 hover:border-neon-gold/35 hover:shadow-gold',
+              quest.repoUrl && 'cursor-pointer',
+            )}
             initial={{ opacity: 0, y: 18 }}
             key={quest.id}
+            onClick={() => {
+              if (quest.repoUrl) {
+                window.open(quest.repoUrl, '_blank', 'noopener,noreferrer')
+              }
+            }}
+            onKeyDown={(event) => {
+              if (!quest.repoUrl) {
+                return
+              }
+
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault()
+                window.open(quest.repoUrl, '_blank', 'noopener,noreferrer')
+              }
+            }}
+            role={quest.repoUrl ? 'link' : undefined}
+            tabIndex={quest.repoUrl ? 0 : undefined}
             transition={{ delay: 0.06 * index, duration: 0.42 }}
             viewport={{ once: true, amount: 0.2 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -76,6 +96,7 @@ export function QuestLogSection({ quests }: QuestLogSectionProps) {
                   <a
                     className="pixel-button border-neon-green bg-neon-green/10 text-neon-green hover:shadow-neon"
                     href={quest.repoUrl}
+                    onClick={(event) => event.stopPropagation()}
                     rel="noreferrer"
                     target="_blank"
                   >
@@ -86,6 +107,7 @@ export function QuestLogSection({ quests }: QuestLogSectionProps) {
                   <a
                     className="pixel-button border-neon-cyan bg-neon-cyan/10 text-neon-cyan hover:shadow-cyan"
                     href={quest.liveUrl}
+                    onClick={(event) => event.stopPropagation()}
                     rel="noreferrer"
                     target="_blank"
                   >

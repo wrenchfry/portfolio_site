@@ -12,9 +12,11 @@ export function SectionHeading({ kicker, title, subtitle }: SectionHeadingProps)
         <h2 className="max-w-3xl font-display text-sm uppercase tracking-[0.22em] text-ice sm:text-base">
           {title}
         </h2>
-        <p className="max-w-2xl text-sm leading-6 text-ice-dim sm:text-base">
-          {subtitle}
-        </p>
+        {subtitle ? (
+          <p className="max-w-2xl text-sm leading-6 text-ice-dim sm:text-base">
+            {subtitle}
+          </p>
+        ) : null}
       </div>
     </div>
   )

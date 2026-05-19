@@ -21,7 +21,7 @@ export function GithubSection({ github }: GithubSectionProps) {
     <section className="section-shell" id="github">
       <SectionHeading
         kicker="Activity Log"
-        subtitle="Live repository signal pulled from the GitHub REST API, separate from the project quest board."
+        subtitle=""
         title="GitHub activity"
       />
 
@@ -30,11 +30,8 @@ export function GithubSection({ github }: GithubSectionProps) {
           <p className="font-display text-[0.56rem] uppercase tracking-[0.24em] text-neon-cyan">
             Signal board
           </p>
-          <p className="mt-4 text-base leading-7 text-ice-dim">
-            A live readout of public repositories, stars, and recent updates from GitHub.
-          </p>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
             {statLabels.map((item, index) => (
               <motion.article
                 className="rounded-[24px] border border-white/10 bg-black/20 px-4 py-4"

@@ -118,6 +118,13 @@ export function HeroSection({
           <a className="pixel-button border-neon-cyan bg-neon-cyan/10 text-neon-cyan hover:shadow-cyan" href="#github">
             activity log
           </a>
+          <a
+            className="pixel-button border-neon-gold bg-neon-gold/10 text-neon-gold hover:shadow-gold"
+            download
+            href="/Lesego_Sindani_CV_Site.pdf"
+          >
+            download cv
+          </a>
         </motion.div>
 
         <div className="grid gap-4 pt-4 sm:grid-cols-2 xl:grid-cols-4">
