@@ -77,12 +77,14 @@ export function HeroSection({
 
         <motion.div
           animate={{ opacity: 1 }}
-          className="flex min-h-[4.8rem] items-center rounded-[24px] border border-neon-green/18 bg-black/25 px-4 py-4 font-mono text-[2rem] leading-none text-neon-green shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:min-h-[5rem] sm:text-[2.4rem]"
+          className="relative h-[6.25rem] max-w-2xl overflow-hidden rounded-[24px] border border-neon-green/18 bg-black/25 px-4 py-4 font-mono text-[1.95rem] text-neon-green shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:h-[5.5rem] sm:text-[2.25rem] lg:h-[5.25rem] lg:text-[2.4rem]"
           initial={{ opacity: 0 }}
           transition={{ delay: 0.1, duration: 0.45 }}
         >
-          <span>{typewriter}</span>
-          <span className="ml-2 inline-block h-8 w-[0.45ch] animate-pulse rounded-sm bg-neon-green/80 align-middle sm:h-9" />
+          <div className="absolute inset-0 flex items-center px-4 py-4">
+            <span className="max-w-[92%] leading-[1.15]">{typewriter}</span>
+            <span className="ml-2 inline-block h-8 w-[0.45ch] flex-shrink-0 animate-pulse rounded-sm bg-neon-green/80 align-middle sm:h-9" />
+          </div>
         </motion.div>
 
         <motion.div
