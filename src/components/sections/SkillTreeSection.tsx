@@ -68,137 +68,98 @@ const branchStyles: Record<
 
 const branchLayouts: Record<SkillBranch, BranchLayout> = {
   languages: {
-    root: { x: 124, y: 116 },
-    title: { x: 104, y: 198 },
+    root: { x: 138, y: 124 },
+    title: { x: 138, y: 214 },
     titleAlign: 'left',
     titleLines: ['Programming', 'Languages'],
     nodes: {
-      haxe: { point: { x: 78, y: 54 }, via: [{ x: 142, y: 104 }, { x: 126, y: 78 }] },
-      python: { point: { x: 168, y: 50 }, via: [{ x: 146, y: 102 }, { x: 164, y: 74 }] },
-      csharp: { point: { x: 258, y: 110 }, via: [{ x: 152, y: 116 }, { x: 208, y: 112 }] },
-      java: { point: { x: 76, y: 186 }, via: [{ x: 144, y: 132 }, { x: 126, y: 166 }] },
-      javascript: {
-        point: { x: 270, y: 178 },
-        via: [{ x: 148, y: 136 }, { x: 208, y: 158 }],
-      },
-      typescript: {
-        point: { x: 216, y: 220 },
-        via: [{ x: 148, y: 140 }, { x: 184, y: 196 }],
-      },
+      haxe: { point: { x: 92, y: 64 } },
+      python: { point: { x: 176, y: 56 } },
+      csharp: { point: { x: 260, y: 116 } },
+      java: { point: { x: 74, y: 184 } },
+      javascript: { point: { x: 252, y: 178 } },
+      typescript: { point: { x: 208, y: 224 } },
     },
   },
   web: {
-    root: { x: 238, y: 242 },
-    title: { x: 228, y: 348 },
+    root: { x: 248, y: 304 },
+    title: { x: 248, y: 396 },
     titleAlign: 'left',
     titleLines: ['Web Tech &', 'Frameworks'],
     nodes: {
-      react: { point: { x: 188, y: 186 }, via: [{ x: 236, y: 220 }, { x: 208, y: 194 }] },
-      html: { point: { x: 286, y: 184 }, via: [{ x: 266, y: 220 }, { x: 294, y: 194 }] },
-      css: { point: { x: 350, y: 238 }, via: [{ x: 278, y: 246 }, { x: 324, y: 240 }] },
-      nodejs: { point: { x: 150, y: 320 }, via: [{ x: 232, y: 266 }, { x: 188, y: 300 }] },
-      tailwind: { point: { x: 358, y: 314 }, via: [{ x: 280, y: 260 }, { x: 328, y: 298 }] },
-      mantine: { point: { x: 260, y: 396 }, via: [{ x: 252, y: 284 }, { x: 256, y: 362 }] },
+      react: { point: { x: 198, y: 226 } },
+      html: { point: { x: 290, y: 222 } },
+      css: { point: { x: 364, y: 294 } },
+      nodejs: { point: { x: 168, y: 378 } },
+      tailwind: { point: { x: 338, y: 372 } },
+      mantine: { point: { x: 248, y: 444 } },
     },
   },
   tools: {
-    root: { x: 126, y: 474 },
-    title: { x: 110, y: 548 },
+    root: { x: 132, y: 520 },
+    title: { x: 132, y: 590 },
     titleAlign: 'left',
     titleLines: ['Tools &', 'Platforms'],
     nodes: {
-      'git-github': { point: { x: 226, y: 434 }, via: [{ x: 160, y: 468 }, { x: 196, y: 446 }] },
-      'azure-platform': { point: { x: 212, y: 532 }, via: [{ x: 156, y: 486 }, { x: 188, y: 518 }] },
+      'git-github': { point: { x: 232, y: 484 } },
+      'azure-platform': { point: { x: 222, y: 566 } },
     },
   },
   backend: {
-    root: { x: 502, y: 124 },
-    title: { x: 500, y: 204 },
+    root: { x: 504, y: 132 },
+    title: { x: 504, y: 224 },
     titleAlign: 'center',
     titleLines: ['Backend & API'],
     nodes: {
-      'dotnet-core': { point: { x: 436, y: 54 }, via: [{ x: 484, y: 104 }, { x: 454, y: 72 }] },
-      'aspnet-core': { point: { x: 568, y: 56 }, via: [{ x: 520, y: 104 }, { x: 548, y: 72 }] },
-      json: { point: { x: 640, y: 118 }, via: [{ x: 530, y: 124 }, { x: 608, y: 124 }] },
-      'rest-apis': { point: { x: 424, y: 172 }, via: [{ x: 478, y: 146 }, { x: 446, y: 164 }] },
-      'client-server': { point: { x: 572, y: 182 }, via: [{ x: 524, y: 152 }, { x: 556, y: 176 }] },
-      'auth-basic': { point: { x: 510, y: 252 }, via: [{ x: 502, y: 162 }, { x: 506, y: 224 }] },
+      'dotnet-core': { point: { x: 438, y: 68 } },
+      'aspnet-core': { point: { x: 572, y: 70 } },
+      json: { point: { x: 646, y: 132 } },
+      'rest-apis': { point: { x: 428, y: 202 } },
+      'client-server': { point: { x: 584, y: 202 } },
+      'auth-basic': { point: { x: 504, y: 282 } },
     },
   },
   databases: {
-    root: { x: 820, y: 118 },
-    title: { x: 822, y: 196 },
+    root: { x: 824, y: 140 },
+    title: { x: 824, y: 232 },
     titleAlign: 'center',
     titleLines: ['Databases'],
     nodes: {
-      sql: { point: { x: 760, y: 58 }, via: [{ x: 794, y: 98 }, { x: 768, y: 70 }] },
-      'relational-databases': { point: { x: 904, y: 60 }, via: [{ x: 846, y: 98 }, { x: 886, y: 72 }] },
-      'azure-sql': { point: { x: 748, y: 208 }, via: [{ x: 794, y: 146 }, { x: 758, y: 192 }] },
-      crud: { point: { x: 904, y: 208 }, via: [{ x: 842, y: 148 }, { x: 890, y: 190 }] },
+      sql: { point: { x: 760, y: 82 } },
+      'relational-databases': { point: { x: 908, y: 82 } },
+      'azure-sql': { point: { x: 754, y: 218 } },
+      crud: { point: { x: 902, y: 220 } },
     },
   },
   concepts: {
-    root: { x: 520, y: 390 },
-    title: { x: 522, y: 488 },
+    root: { x: 508, y: 404 },
+    title: { x: 508, y: 500 },
     titleAlign: 'center',
     titleLines: ['Concepts'],
     nodes: {
-      oop: { point: { x: 432, y: 288 }, via: [{ x: 488, y: 348 }, { x: 446, y: 302 }] },
-      debugging: { point: { x: 524, y: 272 }, via: [{ x: 520, y: 340 }, { x: 524, y: 288 }] },
-      'system-architecture': { point: { x: 650, y: 314 }, via: [{ x: 560, y: 350 }, { x: 624, y: 324 }] },
-      'data-analytics': { point: { x: 440, y: 548 }, via: [{ x: 492, y: 430 }, { x: 450, y: 526 }] },
-      'secure-coding': { point: { x: 522, y: 562 }, via: [{ x: 520, y: 438 }, { x: 522, y: 540 }] },
-      'security-fundamentals': { point: { x: 646, y: 524 }, via: [{ x: 552, y: 430 }, { x: 620, y: 510 }] },
+      oop: { point: { x: 424, y: 316 } },
+      debugging: { point: { x: 506, y: 286 } },
+      'system-architecture': { point: { x: 640, y: 336 } },
+      'data-analytics': { point: { x: 428, y: 534 } },
+      'secure-coding': { point: { x: 506, y: 562 } },
+      'security-fundamentals': { point: { x: 648, y: 506 } },
     },
   },
   cloud: {
-    root: { x: 844, y: 432 },
-    title: { x: 850, y: 504 },
+    root: { x: 836, y: 442 },
+    title: { x: 836, y: 530 },
     titleAlign: 'center',
     titleLines: ['Cloud & DevOps'],
     nodes: {
-      'azure-services': { point: { x: 772, y: 346 }, via: [{ x: 812, y: 396 }, { x: 786, y: 360 }] },
-      'azure-portal': { point: { x: 926, y: 350 }, via: [{ x: 876, y: 398 }, { x: 910, y: 360 }] },
-      'deployment-hosting': { point: { x: 926, y: 550 }, via: [{ x: 874, y: 454 }, { x: 912, y: 530 }] },
+      'azure-services': { point: { x: 754, y: 364 } },
+      'azure-portal': { point: { x: 920, y: 366 } },
+      'deployment-hosting': { point: { x: 920, y: 556 } },
     },
   },
 }
 
-function smoothPath(points: Point[]) {
-  if (points.length < 2) {
-    return ''
-  }
-
-  if (points.length === 2) {
-    const [start, end] = points
-    const control = {
-      x: (start.x + end.x) / 2,
-      y: (start.y + end.y) / 2,
-    }
-
-    return `M ${start.x} ${start.y} Q ${control.x} ${control.y} ${end.x} ${end.y}`
-  }
-
-  const [start, ...rest] = points
-  let path = `M ${start.x} ${start.y}`
-
-  for (let index = 0; index < rest.length - 1; index += 1) {
-    const current = rest[index]
-    const next = rest[index + 1]
-    const midpoint = {
-      x: (current.x + next.x) / 2,
-      y: (current.y + next.y) / 2,
-    }
-
-    if (index === rest.length - 2) {
-      path += ` Q ${current.x} ${current.y} ${next.x} ${next.y}`
-      continue
-    }
-
-    path += ` Q ${current.x} ${current.y} ${midpoint.x} ${midpoint.y}`
-  }
-
-  return path
+function linePath(start: Point, end: Point) {
+  return `M ${start.x} ${start.y} L ${end.x} ${end.y}`
 }
 
 function positionAsPercent(point: Point) {
@@ -292,7 +253,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                   return null
                 }
 
-                const path = smoothPath([layout.root, ...(slot.via ?? []), slot.point])
+                const path = linePath(layout.root, slot.point)
 
                 return (
                   <g key={skill.id}>
@@ -302,7 +263,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                       stroke="rgba(11, 14, 29, 0.96)"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={17}
+                      strokeWidth={12}
                     />
                     <path
                       d={path}
@@ -311,7 +272,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                       stroke={branchStyle.accent}
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={activeBranch === branch ? 6 : 5}
+                      strokeWidth={activeBranch === branch ? 4 : 3}
                     />
                   </g>
                 )
@@ -333,7 +294,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                     <button
                       aria-pressed={activeSkillId === root.id}
                       className={cn(
-                        'absolute flex h-[92px] w-[92px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition duration-300',
+                        'absolute flex h-[96px] w-[96px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition duration-300',
                         branchDimmed && 'opacity-45',
                       )}
                       onClick={() => setActiveSkillId(root.id)}
@@ -348,7 +309,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                       type="button"
                     >
                       <span
-                        className="flex h-[76px] w-[76px] items-center justify-center rounded-full border bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),rgba(7,9,20,0.96)_68%)] font-display text-[0.62rem] uppercase tracking-[0.18em] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
+                        className="flex h-[78px] w-[78px] items-center justify-center rounded-full border bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),rgba(7,9,20,0.96)_68%)] font-display text-[0.62rem] uppercase tracking-[0.18em] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]"
                         style={{
                           color: branchStyle.accent,
                           borderColor: `${branchStyle.accent}88`,
@@ -399,7 +360,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                       <button
                         aria-pressed={isActive}
                         className={cn(
-                          'absolute flex h-[56px] w-[56px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition duration-300',
+                          'absolute flex h-[62px] w-[62px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition duration-300',
                           branchDimmed && 'opacity-38',
                         )}
                         key={skill.id}
@@ -413,7 +374,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                         type="button"
                       >
                         <span
-                          className="flex h-[42px] w-[42px] items-center justify-center rounded-full border bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),rgba(7,9,20,0.96)_72%)] font-display text-[0.42rem] uppercase tracking-[0.14em] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]"
+                          className="flex h-[46px] w-[46px] items-center justify-center rounded-full border bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.1),rgba(7,9,20,0.96)_72%)] font-display text-[0.42rem] uppercase tracking-[0.14em] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
                           style={{
                             color: isActive ? '#ffffff' : branchStyle.accent,
                             borderColor: isActive ? branchStyle.accent : `${branchStyle.accent}66`,
