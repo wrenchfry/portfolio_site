@@ -348,7 +348,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                       type="button"
                     >
                       <span
-                        className="flex h-[76px] w-[76px] items-center justify-center rounded-full border bg-black/80 font-display text-[0.62rem] uppercase tracking-[0.18em]"
+                        className="flex h-[76px] w-[76px] items-center justify-center rounded-full border bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),rgba(7,9,20,0.96)_68%)] font-display text-[0.62rem] uppercase tracking-[0.18em] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
                         style={{
                           color: branchStyle.accent,
                           borderColor: `${branchStyle.accent}88`,
@@ -413,7 +413,7 @@ export function SkillTreeSection({ skills }: { skills: SkillNode[] }) {
                         type="button"
                       >
                         <span
-                          className="flex h-[44px] w-[44px] items-center justify-center rounded-full border bg-[rgba(7,9,20,0.95)] font-display text-[0.42rem] uppercase tracking-[0.14em]"
+                          className="flex h-[42px] w-[42px] items-center justify-center rounded-full border bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),rgba(7,9,20,0.96)_72%)] font-display text-[0.42rem] uppercase tracking-[0.14em] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]"
                           style={{
                             color: isActive ? '#ffffff' : branchStyle.accent,
                             borderColor: isActive ? branchStyle.accent : `${branchStyle.accent}66`,
