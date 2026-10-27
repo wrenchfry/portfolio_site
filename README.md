@@ -4,7 +4,7 @@
 
 # Lesego Sindani Portfolio
 
-Portfolio site built with React, Vite, Tailwind CSS, Framer Motion, the Canvas API, EmailJS, and the GitHub REST API.
+Retro RPG-inspired portfolio built with React, Vite, Tailwind CSS, Framer Motion, Canvas, EmailJS, and the GitHub REST API.
 
 ## Stack
 
