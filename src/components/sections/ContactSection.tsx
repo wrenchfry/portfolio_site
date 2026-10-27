@@ -52,7 +52,11 @@ export function ContactSection({ profile }: ContactSectionProps) {
       setNotice('Message sent successfully.')
     } catch (error) {
       console.error('EmailJS error:', error)
-      setNotice('The message could not be sent right now.')
+      setNotice(
+        error instanceof Error && error.message === 'The contact form is not configured yet.'
+          ? 'The contact form is temporarily unavailable. Please try again later.'
+          : 'The message could not be sent right now. Please try again later.',
+      )
     } finally {
       setIsSending(false)
     }

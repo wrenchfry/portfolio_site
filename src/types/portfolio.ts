@@ -56,7 +56,7 @@ export interface QuestCard {
   liveUrl?: string
   xp: number
   updatedAt?: string
-  source: 'supabase' | 'github'
+  source: 'github'
 }
 
 export interface AchievementCard {

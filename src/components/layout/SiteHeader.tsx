@@ -1,7 +1,6 @@
 const navItems = [
   { href: '#about', label: 'about' },
   { href: '#skill-tree', label: 'skill tree' },
-  { href: '#quests', label: 'quests' },
   { href: '#achievements', label: 'achievements' },
   { href: '#github', label: 'github' },
   { href: '#contact', label: 'contact' },

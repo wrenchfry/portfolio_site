@@ -6,12 +6,10 @@ import { ContactSection } from './components/sections/ContactSection'
 import { GithubSection } from './components/sections/GithubSection'
 import { HeroSection } from './components/sections/HeroSection'
 import { ProfileSection } from './components/sections/ProfileSection'
-import { QuestLogSection } from './components/sections/QuestLogSection'
 import { SkillTreeSection } from './components/sections/SkillTreeSection'
+import { buildFallbackPortfolio } from './data/fallbackPortfolio'
 import { useBootSequence } from './hooks/useBootSequence'
 import { useGithubProfile } from './hooks/useGithubProfile'
-import { usePortfolioContent } from './hooks/usePortfolioContent'
-import { useTypewriter } from './hooks/useTypewriter'
 
 const bootMessages = [
   '> INITIALIZING PORTFOLIO...',
@@ -21,18 +19,10 @@ const bootMessages = [
   '> ALL SYSTEMS NOMINAL',
 ]
 
-const heroPhrases = [
-  'Building cool things for people.',
-  'Shipping apps, bots, and side quests.',
-  'Turning ideas into something playable.',
-  'Commit. Push. Repeat.',
-]
-
 function App() {
   const github = useGithubProfile('wrenchfry')
-  const { content } = usePortfolioContent(github.data)
+  const content = buildFallbackPortfolio(github.data)
   const boot = useBootSequence(bootMessages)
-  const typewriter = useTypewriter(heroPhrases)
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-night text-ice">
@@ -46,12 +36,9 @@ function App() {
           achievementCount={content.achievements.length}
           github={github}
           profile={content.profile}
-          questCount={content.quests.length}
-          typewriter={typewriter}
         />
         <ProfileSection profile={content.profile} />
         <SkillTreeSection skills={content.skills} />
-        <QuestLogSection quests={content.quests} />
         <AchievementsSection achievements={content.achievements} />
         <GithubSection github={github} />
         <ContactSection profile={content.profile} />

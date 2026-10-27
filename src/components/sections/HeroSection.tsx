@@ -9,9 +9,7 @@ type GithubState = ReturnType<typeof useGithubProfile>
 interface HeroSectionProps {
   profile: SiteProfile
   github: GithubState
-  questCount: number
   achievementCount: number
-  typewriter: string
 }
 
 const statCardVariants = {
@@ -29,12 +27,9 @@ const statCardVariants = {
 export function HeroSection({
   profile,
   github,
-  questCount,
   achievementCount,
-  typewriter,
 }: HeroSectionProps) {
   const stats = [
-    { label: 'quests', value: questCount },
     { label: 'achievements', value: achievementCount },
     {
       label: 'repos',
@@ -76,18 +71,6 @@ export function HeroSection({
         </motion.div>
 
         <motion.div
-          animate={{ opacity: 1 }}
-          className="relative h-[6.25rem] max-w-2xl overflow-hidden rounded-[24px] border border-neon-green/18 bg-black/25 px-4 py-4 font-mono text-[1.95rem] text-neon-green shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)] sm:h-[5.5rem] sm:text-[2.25rem] lg:h-[5.25rem] lg:text-[2.4rem]"
-          initial={{ opacity: 0 }}
-          transition={{ delay: 0.1, duration: 0.45 }}
-        >
-          <div className="absolute inset-0 flex items-center px-4 py-4">
-            <span className="max-w-[92%] leading-[1.15]">{typewriter}</span>
-            <span className="ml-2 inline-block h-8 w-[0.45ch] flex-shrink-0 animate-pulse rounded-sm bg-neon-green/80 align-middle sm:h-9" />
-          </div>
-        </motion.div>
-
-        <motion.div
           animate={{ opacity: 1, y: 0 }}
           className="panel max-w-2xl border border-neon-green/18 px-5 py-4"
           initial={{ opacity: 0, y: 12 }}
@@ -112,22 +95,19 @@ export function HeroSection({
           initial={{ opacity: 0, y: 12 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <a className="pixel-button border-neon-green bg-neon-green text-night hover:shadow-neon" href="#quests">
-            quest log
-          </a>
           <a className="pixel-button border-neon-cyan bg-neon-cyan/10 text-neon-cyan hover:shadow-cyan" href="#github">
             activity log
           </a>
           <a
             className="pixel-button border-neon-gold bg-neon-gold/10 text-neon-gold hover:shadow-gold"
             download
-            href="/Lesego_Sindani_CV_Site.pdf"
+            href={`${import.meta.env.BASE_URL}Lesego_Sindani_JRDEV_CV.pdf`}
           >
             download cv
           </a>
         </motion.div>
 
-        <div className="grid gap-4 pt-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 pt-4 sm:grid-cols-3">
           {stats.map((stat, index) => (
             <motion.div
               animate="visible"

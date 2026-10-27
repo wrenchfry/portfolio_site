@@ -70,9 +70,6 @@ export function GithubSection({ github }: GithubSectionProps) {
               <p className="font-display text-[0.56rem] uppercase tracking-[0.24em] text-neon-cyan">
                 Recent repository activity
               </p>
-              <p className="mt-3 text-sm leading-6 text-ice-dim">
-                The latest public repos, stack choices, and updates from the live profile feed.
-              </p>
             </div>
 
             {github.data ? (

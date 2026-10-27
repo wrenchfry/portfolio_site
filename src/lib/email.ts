@@ -14,13 +14,7 @@ export interface MessagePayload {
 
 export async function sendPortfolioMessage(payload: MessagePayload) {
   if (!emailJsConfigured) {
-    const subject = encodeURIComponent(`Portfolio message from ${payload.fromName}`)
-    const body = encodeURIComponent(
-      `${payload.message}\n\nFrom: ${payload.fromName}\nReply: ${payload.replyTo}`
-    )
-
-    window.location.href = `mailto:?subject=${subject}&body=${body}`
-    return 'mailto'
+    throw new Error('The contact form is not configured yet.')
   }
 
   try {
