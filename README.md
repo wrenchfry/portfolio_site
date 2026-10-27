@@ -4,7 +4,7 @@
 
 # Lesego Sindani Portfolio
 
-Portfolio site built with React, Vite, Tailwind CSS, Framer Motion, the Canvas API, Supabase, EmailJS, and the GitHub REST API.
+Portfolio site built with React, Vite, Tailwind CSS, Framer Motion, the Canvas API, EmailJS, and the GitHub REST API.
 
 ## Stack
 
@@ -12,7 +12,6 @@ Portfolio site built with React, Vite, Tailwind CSS, Framer Motion, the Canvas A
 - Tailwind CSS
 - Framer Motion
 - HTML Canvas API
-- Supabase
 - EmailJS
 - GitHub REST API
 
@@ -25,7 +24,7 @@ npm install
 ```
 
 2. Copy `.env.example` to `.env`.
-3. Add your Supabase and EmailJS keys if you want live content and frontend email sending.
+3. Add your EmailJS values if you want the contact form to send messages.
 4. Start the app:
 
 ```bash
@@ -36,21 +35,10 @@ npm run dev
 
 ```bash
 VITE_BASE_PATH=/
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
 VITE_EMAILJS_PUBLIC_KEY=
 VITE_EMAILJS_SERVICE_ID=
 VITE_EMAILJS_TEMPLATE_ID=
 ```
-
-## Supabase setup
-
-1. Create a free Supabase project.
-2. Open the SQL editor.
-3. Run [`supabase/schema.sql`](./supabase/schema.sql).
-4. Copy the project URL and anon key into `.env`.
-
-If Supabase is not configured, the site uses the built-in portfolio content.
 
 ## EmailJS setup
 
@@ -62,7 +50,8 @@ If Supabase is not configured, the site uses the built-in portfolio content.
 from_name
 reply_to
 message
-to_email
 ```
 
 4. Copy the public key, service ID, and template ID into `.env`.
+
+For the deployed GitHub Pages site, add the same three values as GitHub Actions secrets named `VITE_EMAILJS_PUBLIC_KEY`, `VITE_EMAILJS_SERVICE_ID`, and `VITE_EMAILJS_TEMPLATE_ID`. The workflow passes them to the production build. Without them, the form stays on the site and shows an unavailable message; it never opens a visitor's mail application.
